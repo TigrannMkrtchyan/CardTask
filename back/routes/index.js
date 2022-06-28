@@ -10,12 +10,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
   const { number } = req.body;
   arr.push(number)
-  res.send({ data: arr, success: true });
-});
-
-router.put('/', function (req, res) {
-  arr.sort((a, b) => a - b)
-  res.send({ data: arr, success: true });
+  res.send({ data: number, success: true });
 });
 
 router.delete('/', function (req, res) {

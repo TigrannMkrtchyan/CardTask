@@ -1,0 +1,7 @@
+.cardsContainer {
+    width: 100%;
+    background-color: rgb(249, 224, 243);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

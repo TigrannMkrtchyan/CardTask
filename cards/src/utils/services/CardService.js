@@ -4,16 +4,16 @@ import env from "../constants/env";
 
 const url = env.backendUrl
 
-export const CardServiceContetx = createContext();
+export const CardServiceContext = createContext();
 
 const CardService = ({ children }) => {
-
     const cardService = {
-
         async getCards() {
             try {
                 const response = await axios.get(url)
-                return response.data
+                if (response.data) {
+                    return response.data
+                }
             }
             catch (err) {
                 console.log(err)
@@ -23,17 +23,9 @@ const CardService = ({ children }) => {
         async addCards(number) {
             try {
                 const response = await axios.post(url, { number: number })
-                return response.data
-            }
-            catch (err) {
-                console.log(err)
-            }
-        },
-
-        async sortCards() {
-            try {
-                const response = await axios.put(url)
-                return response.data
+                if (response.data) {
+                    return response.data
+                }
             }
             catch (err) {
                 console.log(err)
@@ -42,8 +34,10 @@ const CardService = ({ children }) => {
 
         async deleteCards(number) {
             try {
-                const response = await axios.delete(url, { data: { number: number }, headers: { "Authorization": "***" } })
-                return response.data
+                const response = await axios.delete(url, { data: { number: number } })
+                if (response.data) {
+                    return response.data
+                }
             }
             catch (err) {
                 console.log(err)
@@ -52,7 +46,7 @@ const CardService = ({ children }) => {
     };
 
     return (
-        <CardServiceContetx.Provider value={cardService}>{children}</CardServiceContetx.Provider>
+        <CardServiceContext.Provider value={cardService}>{children}</CardServiceContext.Provider>
     )
 };
 
