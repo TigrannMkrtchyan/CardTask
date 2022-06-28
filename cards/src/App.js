@@ -4,24 +4,22 @@ import Home from './components/features/home';
 import { randomNumber } from './utils/helpers';
 import { CardServiceContext } from './utils/services/CardService';
 
-
 function App() {
-
-  const hop = useContext(CardServiceContext)
+  const { getCards, addCards, deleteCards } = useContext(CardServiceContext)
   const [cardData, setCardData] = useState([]);
 
   const getAllCards = async () => {
-    const cards = await hop.getCards()
+    const cards = await getCards()
     if (cards.success) {
       setCardData(cards.data)
     }
   }
-  console.log(cardData)
+
   useEffect(() => { getAllCards() }, [])
 
   const handleAddCard = async () => {
     const number = randomNumber(10000)
-    const card = await hop.addCards(number)
+    const card = await addCards(number)
     if (card.success) {
       setCardData([...cardData, card.data])
     }
@@ -32,7 +30,7 @@ function App() {
   };
 
   const handleDelete = async (number) => {
-    const cards = await hop.deleteCards(number)
+    const cards = await deleteCards(number)
     if (cards.success) {
       setCardData(cards.data)
     }
@@ -40,12 +38,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Header
-          handleAddCard={handleAddCard}
-          handleSortCards={handleSortCards}
-        />
-      </header>
+      <Header
+        handleAddCard={handleAddCard}
+        handleSortCards={handleSortCards}
+      />
       <Home
         handleDelete={handleDelete}
         cardData={cardData}
