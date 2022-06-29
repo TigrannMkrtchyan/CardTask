@@ -1,14 +1,15 @@
 import { ReactNode } from "react";
 
-export interface CardResponse {
+export interface GetCardResponse {
   success: boolean;
-  data:  number[] ;
+  data: number[];
 }
 
 export interface PostResponse {
   success: boolean;
-  data:  number;
+  data: number;
 }
+
 export interface ContextProps {
   [key: string]: string | ReactNode;
 }

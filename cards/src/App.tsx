@@ -15,8 +15,6 @@ function App(): JSX.Element {
     }
   }
 
-  useEffect((): void => { getAllCards() }, [])
-
   const handleAddCard = async (): Promise<void> => {
     const cardNumber: number = randomNumber(10000)
     const card = await addCards(cardNumber)
@@ -35,6 +33,8 @@ function App(): JSX.Element {
       setCardData(cards.data)
     }
   };
+
+  useEffect((): void => { getAllCards() }, [])
 
   return (
     <div className="App">

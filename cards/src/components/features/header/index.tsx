@@ -2,7 +2,7 @@ import { HeaderProps } from './types';
 
 import './header.css';
 
-const Header = ({ handleAddCard, handleSortCards }:HeaderProps):JSX.Element => {
+const Header = ({ handleAddCard, handleSortCards }: HeaderProps): JSX.Element => {
     return (
         <header>
             <div className='buttonContainer'>

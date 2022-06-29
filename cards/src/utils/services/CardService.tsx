@@ -1,12 +1,12 @@
 import { Context, createContext } from "react";
 import axios from "axios";
 import env from "../constants/env";
-import { ContextProps, CardResponse,PostResponse } from '../types/cards'
+import { ContextProps, GetCardResponse, PostResponse } from '../types/cards'
 
 interface CardServiceTypes {
-    getCards: () => Promise<CardResponse>;
+    getCards: () => Promise<GetCardResponse>;
     addCards: (cardNumber: number) => Promise<PostResponse>;
-    deleteCards: (cardNumber: number) => Promise<CardResponse>;
+    deleteCards: (cardNumber: number) => Promise<GetCardResponse>;
 }
 
 const url = env.backendUrl
@@ -15,7 +15,7 @@ export const CardServiceContext: Context<CardServiceTypes | null> = createContex
 
 const CardService = ({ children }: ContextProps): JSX.Element => {
     const cardService: CardServiceTypes = {
-        async getCards(): Promise<CardResponse> {
+        async getCards(): Promise<GetCardResponse> {
             try {
                 const response = await axios.get(url)
                 if (response.data) {
@@ -29,7 +29,7 @@ const CardService = ({ children }: ContextProps): JSX.Element => {
 
         async addCards(cardNumber: number): Promise<PostResponse> {
             try {
-                const response = await axios.post(url, { cardNumber: cardNumber })
+                const response = await axios.post(url, { cardNumber })
                 if (response.data) {
                     return response.data
                 }
@@ -39,9 +39,9 @@ const CardService = ({ children }: ContextProps): JSX.Element => {
             }
         },
 
-        async deleteCards(cardNumber: number): Promise<CardResponse> {
+        async deleteCards(cardNumber: number): Promise<GetCardResponse> {
             try {
-                const response = await axios.delete(url, { data: { cardNumber: cardNumber } })
+                const response = await axios.delete(url, { data: { cardNumber } })
                 if (response.data) {
                     return response.data
                 }

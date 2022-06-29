@@ -1,4 +1,4 @@
-export interface HeaderProps{
-    handleAddCard:()=>void
-    handleSortCards:()=>void
+export interface HeaderProps {
+  handleAddCard: () => void;
+  handleSortCards: () => void;
 }
