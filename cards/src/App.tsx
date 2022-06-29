@@ -4,33 +4,33 @@ import Home from './components/features/home';
 import { randomNumber } from './utils/helpers';
 import { CardServiceContext } from './utils/services/CardService';
 
-function App() {
+function App(): JSX.Element {
   const { getCards, addCards, deleteCards } = useContext(CardServiceContext)
-  const [cardData, setCardData] = useState([]);
+  const [cardData, setCardData] = useState<number[] | []>([]);
 
-  const getAllCards = async () => {
+  const getAllCards = async (): Promise<void> => {
     const cards = await getCards()
     if (cards.success) {
       setCardData(cards.data)
     }
   }
 
-  useEffect(() => { getAllCards() }, [])
+  useEffect((): void => { getAllCards() }, [])
 
-  const handleAddCard = async () => {
-    const number = randomNumber(10000)
-    const card = await addCards(number)
+  const handleAddCard = async (): Promise<void> => {
+    const cardNumber: number = randomNumber(10000)
+    const card = await addCards(cardNumber)
     if (card.success) {
       setCardData([...cardData, card.data])
     }
   };
 
-  const handleSortCards = async () => {
-    setCardData([...cardData.sort((a, b) => a - b)])
+  const handleSortCards = (): void => {
+    setCardData([...cardData.sort((a: number, b: number): number => a - b)])
   };
 
-  const handleDelete = async (number) => {
-    const cards = await deleteCards(number)
+  const handleDelete = async (cardNumber: number): Promise<void> => {
+    const cards = await deleteCards(cardNumber)
     if (cards.success) {
       setCardData(cards.data)
     }

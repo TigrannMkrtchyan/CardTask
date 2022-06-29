@@ -1,14 +1,21 @@
-import { createContext } from "react";
+import { Context, createContext } from "react";
 import axios from "axios";
 import env from "../constants/env";
+import { ContextProps, CardResponse,PostResponse } from '../types/cards'
+
+interface CardServiceTypes {
+    getCards: () => Promise<CardResponse>;
+    addCards: (cardNumber: number) => Promise<PostResponse>;
+    deleteCards: (cardNumber: number) => Promise<CardResponse>;
+}
 
 const url = env.backendUrl
 
-export const CardServiceContext = createContext();
+export const CardServiceContext: Context<CardServiceTypes | null> = createContext(null);
 
-const CardService = ({ children }) => {
-    const cardService = {
-        async getCards() {
+const CardService = ({ children }: ContextProps): JSX.Element => {
+    const cardService: CardServiceTypes = {
+        async getCards(): Promise<CardResponse> {
             try {
                 const response = await axios.get(url)
                 if (response.data) {
@@ -20,9 +27,9 @@ const CardService = ({ children }) => {
             }
         },
 
-        async addCards(number) {
+        async addCards(cardNumber: number): Promise<PostResponse> {
             try {
-                const response = await axios.post(url, { number: number })
+                const response = await axios.post(url, { cardNumber: cardNumber })
                 if (response.data) {
                     return response.data
                 }
@@ -32,9 +39,9 @@ const CardService = ({ children }) => {
             }
         },
 
-        async deleteCards(number) {
+        async deleteCards(cardNumber: number): Promise<CardResponse> {
             try {
-                const response = await axios.delete(url, { data: { number: number } })
+                const response = await axios.delete(url, { data: { cardNumber: cardNumber } })
                 if (response.data) {
                     return response.data
                 }

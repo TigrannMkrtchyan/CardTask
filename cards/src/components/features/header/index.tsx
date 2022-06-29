@@ -1,6 +1,8 @@
-import './header.css'
+import { HeaderProps } from './types';
 
-const Header = ({ handleAddCard, handleSortCards }) => {
+import './header.css';
+
+const Header = ({ handleAddCard, handleSortCards }:HeaderProps):JSX.Element => {
     return (
         <header>
             <div className='buttonContainer'>
@@ -9,6 +11,6 @@ const Header = ({ handleAddCard, handleSortCards }) => {
             </div>
         </header>
     )
-}
+};
 
-export default Header
+export default Header;
