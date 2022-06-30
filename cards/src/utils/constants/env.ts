@@ -3,7 +3,7 @@ interface Env {
 }
 
 const env: Env = {
-  backendUrl: process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
+  backendUrl: process.env.REACT_APP_BACKEND_URL || "http://localhost:8080",
 };
 
 export default env;

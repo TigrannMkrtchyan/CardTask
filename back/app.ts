@@ -14,7 +14,6 @@ app.use(
   })
 );
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,6 +32,6 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-const PORT = process.env.PORT || "8000";
+const PORT = process.env.PORT || "8080";
 // tslint:disable-next-line:no-console
 app.listen(PORT, () => console.log(`Server listening to port ${PORT}`));

@@ -30,7 +30,8 @@ function App(): JSX.Element {
   const handleDelete = async (cardNumber: number): Promise<void> => {
     const cards = await deleteCards(cardNumber)
     if (cards.success) {
-      setCardData(cards.data)
+      const result = cardData.filter((value) => value !== cardNumber);
+      setCardData(result)
     }
   };
 
